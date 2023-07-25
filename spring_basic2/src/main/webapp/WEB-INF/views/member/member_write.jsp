@@ -4,12 +4,23 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>TRACK11 홍길동</title>
+	<title>TRACK11 이소민</title>
+	
 	<link href="css/common.css" rel="stylesheet">
-	<link href="css/layout.css" rel="stylesheet" >		
+	<link href="css/layout.css" rel="stylesheet" >
+	<script type="text/javascript" src="js/common.js"></script>
 	
 	<script type="text/javascript">
-
+		function goSave(){
+			if(checkValue(mem.t_id,"아이디를 입력하세요")) return;
+			if(checkValue(mem.t_name,"성명을 입력하세요")) return;
+			if(checkValue(mem.t_age,"나이를 입력하세요")) return;
+			if(checkValue(mem.t_reg_date,"가입일을 입력하세요")) return;
+			
+			mem.method="post";
+			mem.action="memberSave";
+			mem.submit();
+		}
 	</script>
 
 </head>
@@ -17,10 +28,10 @@
 	<div class="container">
 
 		<div class="leftmargin">
-			<img src="images/jsl_logo.png"><h1>TRACK11 홍길동 회원관리</h1>
+			<img src="images/jsl_logo.png"><h1>TRACK11 이소민 회원관리</h1>
 		</div>		
 		<div class="write_wrap">
-			<form name="board">
+			<form name="mem">
 			<div class="board_list">
 				<table class="board_table">
 					<colgroup>
@@ -31,25 +42,25 @@
 						<tr>
 							<th>ID</th>
 							<td class="th_left">
-								<input name=""  class="input_100px" type="text">
+								<input name="t_id"  class="input_100px" type="text">
 							</td>
 						</tr>
 						<tr>
 							<th>성명</th>
 							<td class="th_left">
-								<input name=""  class="input_300px" type="text">
+								<input name="t_name"  class="input_300px" type="text">
 							</td>
 						</tr>
 						<tr>
 							<th>나이</th>
 							<td class="th_left">
-								<input name=""  class="input_100px" type="text">
+								<input name="t_age"  class="input_100px" type="text">
 							</td>
 						</tr>
 						<tr>
 							<th>가입일</th>
 							<td class="th_left">
-								<input name=""  class="input_200px" type="date">							
+								<input name="t_reg_date"  class="input_200px" type="date">							
 							</td>
 						</tr>
 					</tbody>
@@ -57,8 +68,8 @@
 			</div>
 			</form>
 			<div class="btn_wrap">
-				<input type="button" value="등록" class="btn_ok">&nbsp;&nbsp;
-				<input type="button" value="목록" onclick="" class="btn_list">
+				<input type="button" value="등록" onclick="goSave()" class="btn_ok">&nbsp;&nbsp;
+				<input type="button" value="목록" onclick="location.href='memberList'" class="btn_list">
 			</div>
 		</div>
 	</div>

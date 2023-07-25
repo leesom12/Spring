@@ -19,7 +19,7 @@ public class MemberDao {
 		String query="insert into h_이소민_member\r\n" + 
 					 "(id, name, age, reg_date)\r\n" + 
 					 "values\r\n" + 
-					 "('"+dto.getId()+"', '"+dto.getName()+"',"+dto.getAge()+",'"+dto.getReg_Date()+"')";
+					 "('"+dto.getId()+"', '"+dto.getName()+"',"+dto.getAge()+",'"+dto.getReg_date()+"')";
 		try {
 			con= DBConnection.getConnection();
 			ps=con.prepareStatement(query);
@@ -34,12 +34,12 @@ public class MemberDao {
 	}
 	
 	//조회
-	public ArrayList<MemberDto> memberList(String gubun, String search){
+	public ArrayList<MemberDto> memberList(String select, String search){
 		ArrayList<MemberDto> dtos = new ArrayList<>();
 		String query="select id, name, age,\r\n" + 
 					 "to_char(reg_date, 'yyyy-mm-dd') as reg_date\r\n" + 
 					 "from h_이소민_member\r\n"+
-					 "where "+gubun+" like '%"+search+"%'"+
+					 "where "+select+" like '%"+search+"%'"+
 					 "order by reg_date desc";
 		try {
 			con=DBConnection.getConnection();
@@ -62,11 +62,37 @@ public class MemberDao {
 		return dtos;
 	}
 	
+	//뷰
+	public MemberDto memberView(String id) {
+		MemberDto dto = null;
+		String query="select id, name, age,\r\n" + 
+				 "to_char(reg_date, 'yyyy-mm-dd') as reg_date\r\n" + 
+				 "from h_이소민_member\r\n"+
+				 "where id ='"+id+"'";
+		try {
+			con=DBConnection.getConnection();
+			ps=con.prepareStatement(query);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				String name= rs.getString("name");
+				int age= rs.getInt("age");
+				String reg_date= rs.getString("reg_date");
+				dto= new MemberDto(id, name, age, reg_date);
+			}
+		}catch(Exception e) {
+			System.out.println("memberView(): "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return dto;
+	}
+	
 	//수정
 	public int memberUpadate(MemberDto dto) {
 		int result= 0;
 		String query="update h_이소민_member\r\n" + 
-					 "set name='"+dto.getName()+"', age="+dto.getAge()+", reg_date='"+dto.getReg_Date()+"'\r\n" + 
+					 "set name='"+dto.getName()+"', age="+dto.getAge()+", reg_date='"+dto.getReg_date()+"'\r\n" + 
 					 "where id='"+dto.getId()+"'";
 		try {
 			con= DBConnection.getConnection();

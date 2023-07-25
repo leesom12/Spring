@@ -16,7 +16,7 @@ public class MemberDto {
 	public String getName() {
 		return name;
 	}
-	public String getReg_Date() {
+	public String getReg_date() {
 		return reg_date;
 	}
 	public int getAge() {
