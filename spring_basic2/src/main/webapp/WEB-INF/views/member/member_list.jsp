@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!DOCTYPE html>
+
 <html> 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,14 +12,14 @@
  -->	
 	<title>TRACK11 홍길동</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">	
-	<link href="../css/common.css" rel="stylesheet">
-	<link href="../css/layout.css" rel="stylesheet" >	
+	<link href="css/common.css" rel="stylesheet">
+	<link href="css/layout.css" rel="stylesheet" >	
 </head>
 <body>
 	<div class="container">
 
 		<div class="leftmargin">
-			<img src="../images/jsl_logo.png"><h1>TRACK11 홍길동 회원관리</h1>
+			<img src="images/jsl_logo.png"><h1>TRACK11 홍길동 회원관리</h1>
 		</div>		
 		<div class="search_wrap">
 			<div class="record_group">

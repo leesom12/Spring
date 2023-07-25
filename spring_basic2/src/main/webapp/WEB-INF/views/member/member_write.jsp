@@ -58,7 +58,7 @@
 			</form>
 			<div class="btn_wrap">
 				<input type="button" value="등록" class="btn_ok">&nbsp;&nbsp;
-				<input type="button" value="목록" onclick="location.href='member_list.html'" class="btn_list">
+				<input type="button" value="목록" onclick="" class="btn_list">
 			</div>
 		</div>
 	</div>
