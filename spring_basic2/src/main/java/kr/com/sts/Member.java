@@ -94,13 +94,16 @@ public class Member {
 		MemberDao dao = new MemberDao();
 		
 		int result = dao.memberUpadate(dto);
-		String msg="수정 성공";
-		if(result != 1) msg="수정 실패!!";
+//		String msg="수정 성공";
+//		if(result != 1) msg="수정 실패!!";
+		
+		String msg= result == 1? "수정 성공" : "수정 실패!!";
 		
 		request.setAttribute("t_msg", msg);
 		request.setAttribute("t_url", "memberList");
 		
-		return "/common_alert";
+//		return "/common_alert";
+		return "redirect:memberList";	//mapping 명을 찾아라
 	}
 	
 	//삭제
