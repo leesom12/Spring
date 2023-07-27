@@ -7,11 +7,61 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import command.member.MemberDelete;
+import command.member.MemberList;
+import command.member.MemberUpdate;
+import command.member.MemberView;
+import command.member.MemberWrite;
+import common.CommonExecute;
 import dao.MemberDao;
 import dto.MemberDto;
 
 @Controller
 public class Member {
+	
+	//Member-MVC 패턴
+	@RequestMapping("Member")
+	public String member(HttpServletRequest request) {
+		String gubun = request.getParameter("t_gubun");
+		if(gubun == null) gubun="list";
+		String viewPage= "";
+		
+		//목록
+		if(gubun.equals("list")) {
+			CommonExecute ce = new MemberList();
+			ce.execute(request);
+			viewPage="/memberMvc/member_list";
+		// 등록폼
+		}else if(gubun.equals("writeForm")) {
+			viewPage="/memberMvc/member_write";
+		//등록	
+		}else if(gubun.equals("write")) {
+			CommonExecute ce = new MemberWrite();
+			ce.execute(request);
+			viewPage="/common_alert";
+		//뷰	
+		}else if(gubun.equals("view")) {
+			CommonExecute ce = new MemberView();
+			ce.execute(request);
+			viewPage= "/memberMvc/member_view";
+		//업데이트 폼	
+		}else if(gubun.equals("updateForm")) {
+			CommonExecute ce = new MemberView();
+			ce.execute(request);
+			viewPage="/memberMvc/member_update";
+		//업데이트	
+		}else if(gubun.equals("update")) {
+			CommonExecute ce = new MemberUpdate();
+			ce.execute(request);
+			viewPage="/common_alert";
+		//삭제	
+		}else if(gubun.equals("delete")) {
+			CommonExecute ce = new MemberDelete();
+			ce.execute(request);
+			viewPage="/common_alert";
+		}
+		return viewPage;
+	}
 	
 	//등록 폼
 	@RequestMapping("memberWrite")
