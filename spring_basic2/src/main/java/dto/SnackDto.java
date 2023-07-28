@@ -6,12 +6,13 @@ public class SnackDto {
 	private int price;
 	
 	//조회
-	public SnackDto(String p_code, String p_name, String m_name, String strPrice) {
+	public SnackDto(String p_code, String p_name, String m_name, String strPrice, int price) {
 		super();
 		this.p_code = p_code;
 		this.p_name = p_name;
 		this.m_name = m_name;
 		this.strPrice = strPrice;
+		this.price = price;
 	}
 
 	//수정, 등록

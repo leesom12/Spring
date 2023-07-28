@@ -62,7 +62,7 @@ public class SnackDao {
 	public ArrayList<SnackDto> getSnackList(String gubun, String search){
 		ArrayList<SnackDto> arr = new ArrayList<SnackDto>();
 		String query="select h.p_code, h.p_name, c.m_name, \r\n" + 
-					 "to_char(h.price, '999,999') as price\r\n" + 
+					 "to_char(h.price, '999,999') as strPrice, h.price\r\n" + 
 					 "from h_이소민_snack h, commonsnack c\r\n" + 
 					 "where h.m_code = c.m_code\r\n" + 
 					 "and "+gubun+" like '%"+search+"%'\r\n"+
@@ -75,9 +75,10 @@ public class SnackDao {
 				String p_code= rs.getString("p_code");
 				String p_name= rs.getString("p_name");
 				String m_name= rs.getString("m_name");
-				String price= rs.getString("price");
+				String strPrice= rs.getString("strPrice");
+				int price = rs.getInt("price");
 				
-				SnackDto dto= new SnackDto(p_code, p_name, m_name, price);
+				SnackDto dto= new SnackDto(p_code, p_name, m_name, strPrice, price);
 				arr.add(dto);
 			}
 		}catch(Exception e) {
@@ -92,7 +93,7 @@ public class SnackDao {
 	//상세 조회
 	public SnackDto snackSearch(String p_code) {
 		SnackDto dto= null;
-		String query="select h.p_code, h.p_name, h.m_code ,c.m_name, to_char(h.price, '999,999') as price\r\n" + 
+		String query="select h.p_code, h.p_name, h.m_code ,c.m_name, to_char(h.price, '999,999') as strPrice, h.price\r\n" + 
 					 "from h_이소민_snack h, commonsnack c\r\n" + 
 					 "where h.m_code = c.m_code\r\n" + 
 					 "and p_code='"+p_code+"'";
@@ -103,9 +104,10 @@ public class SnackDao {
 			if(rs.next()) {
 				String p_name= rs.getString("p_name");
 				String m_name= rs.getString("m_name");
-				String price= rs.getString("price");
+				String strPrice= rs.getString("strPrice");
+				int price = rs.getInt("price");
 				
-				dto= new SnackDto(p_code, p_name, m_name, price);
+				dto= new SnackDto(p_code, p_name, m_name, strPrice, price);
 			}
 		}catch(Exception e) {
 			System.out.println("snackSearch(): "+query);
