@@ -5,10 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+
+import common.CommonTemplate;
 import common.DBConnection;
 import dto.MemberDto;
 
 public class MemberDao {
+	
+	JdbcTemplate template = CommonTemplate.getTemplate();
+	
 	Connection con= null;
 	PreparedStatement ps= null;
 	ResultSet rs= null;
@@ -35,56 +43,27 @@ public class MemberDao {
 	
 	//조회
 	public ArrayList<MemberDto> memberList(String select, String search){
-		ArrayList<MemberDto> dtos = new ArrayList<>();
 		String query="select id, name, age,\r\n" + 
 					 "to_char(reg_date, 'yyyy-mm-dd') as reg_date\r\n" + 
 					 "from h_이소민_member\r\n"+
 					 "where "+select+" like '%"+search+"%'"+
 					 "order by reg_date desc";
-		try {
-			con=DBConnection.getConnection();
-			ps=con.prepareStatement(query);
-			rs=ps.executeQuery();
-			while(rs.next()) {
-				String id= rs.getString(1);
-				String name= rs.getString(2);
-				int age= rs.getInt(3);
-				String reg_date= rs.getString(4);
-				MemberDto dto= new MemberDto(id, name, age, reg_date);
-				dtos.add(dto);
-			}
-		}catch(Exception e) {
-			System.out.println("memberList(): "+query);
-			e.printStackTrace();
-		}finally {
-			DBConnection.closeDB(con, ps, rs);
-		}
+		
+		RowMapper<MemberDto> memdtoList = new BeanPropertyRowMapper<MemberDto>(MemberDto.class);
+		ArrayList<MemberDto> dtos = (ArrayList<MemberDto>) template.query(query, memdtoList);
+		
 		return dtos;
 	}
 	
 	//뷰
 	public MemberDto memberView(String id) {
-		MemberDto dto = null;
 		String query="select id, name, age,\r\n" + 
 				 "to_char(reg_date, 'yyyy-mm-dd') as reg_date\r\n" + 
 				 "from h_이소민_member\r\n"+
 				 "where id ='"+id+"'";
-		try {
-			con=DBConnection.getConnection();
-			ps=con.prepareStatement(query);
-			rs=ps.executeQuery();
-			if(rs.next()) {
-				String name= rs.getString("name");
-				int age= rs.getInt("age");
-				String reg_date= rs.getString("reg_date");
-				dto= new MemberDto(id, name, age, reg_date);
-			}
-		}catch(Exception e) {
-			System.out.println("memberView(): "+query);
-			e.printStackTrace();
-		}finally {
-			DBConnection.closeDB(con, ps, rs);
-		}
+		RowMapper<MemberDto> memDto = new BeanPropertyRowMapper<MemberDto>(MemberDto.class);
+		MemberDto dto = template.queryForObject(query, memDto);
+		
 		return dto;
 	}
 	
