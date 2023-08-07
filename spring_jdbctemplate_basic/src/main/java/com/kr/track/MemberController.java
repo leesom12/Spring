@@ -23,7 +23,7 @@ import dto.MemberDto;
 @Controller
 public class MemberController {
 	
-	//@Autowired: 자동으로 연결해준다. servlet-context.xml에서 설정한 것을 이 클래스에서 쓰겠다.
+	//@Autowired: 자동으로 연결해준다. servlet-context.xml에서 설정한 jdbctemplate 클래스를 사용할 수 있음. Spring에서 관리하는 클래스에서만 쓸 수 있음. 즉 controller에서만 사용 가능
 	@Autowired
 	MemberDto memDto;
 	@Autowired

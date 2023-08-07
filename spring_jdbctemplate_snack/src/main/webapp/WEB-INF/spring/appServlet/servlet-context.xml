@@ -24,13 +24,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.kr.track" />
-	
+	<context:component-scan base-package="kr.com.snack" />
 	
 	<!-- jdbc template: class 생성 -->
-	<beans:bean name="memDto" class="dto.MemberDto">
-		<beans:property name="id" value="501" />	<!-- class에 있는 전역 변수에 값을 매칭시키는 것 -->
+	<beans:bean name="template" class="org.springframework.jdbc.core.JdbcTemplate">
+		<beans:property name="dataSource" ref="dataSource"></beans:property>
 	</beans:bean>
+	
 	
 	<!-- DBConnection -->
 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -40,8 +40,6 @@
         <beans:property name="password" value="1234"></beans:property>
 	</beans:bean> 	
 	
-	<beans:bean name="template" class="org.springframework.jdbc.core.JdbcTemplate">
-		<beans:property name="dataSource" ref="dataSource"></beans:property>
-	</beans:bean>
+
 	
 </beans:beans>
