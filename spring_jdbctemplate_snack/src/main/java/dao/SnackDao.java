@@ -74,10 +74,12 @@ public class SnackDao {
 	}
 	
 	//제품코드 중복 검사
-	public int checkPCode(String p_code) {
-		String query="select count(*) as count\r\n" + 
+	public SnackDto checkPCode(String p_code) {
+		String query="select count(*) as code_count\r\n" + 
 					 "from h_이소민_snack\r\n" + 
 					 "where p_code='"+p_code+"'";
-		return template.update(query);
+		RowMapper<SnackDto> snackdto = new BeanPropertyRowMapper<SnackDto>(SnackDto.class);
+		SnackDto dto = template.queryForObject(query, snackdto);
+		return dto;
 	}
 }

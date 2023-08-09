@@ -15,12 +15,8 @@ public class SnackUpdate implements CommonExecute {
 		String p_code = request.getParameter("t_p_code");
 		String p_name = request.getParameter("t_p_name");
 		String s_price = request.getParameter("t_price");
-		System.out.println("===가격1:"+s_price+"===");
 		s_price = s_price.replaceAll(",", "");
 		s_price = s_price.replaceAll(" ", "");
-		System.out.println("===코드:"+p_code+"===");
-		System.out.println("===이름:"+p_name+"===");
-		System.out.println("===가격2:"+s_price+"===");
 		int price = Integer.parseInt(s_price);
 		String m_code = request.getParameter("t_m_code");
 		

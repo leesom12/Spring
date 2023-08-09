@@ -20,7 +20,8 @@ public class SnackSave implements CommonExecute {
 		int price = Integer.parseInt(s_price);
 		String m_code = request.getParameter("t_m_code");
 		
-		int count = dao.checkPCode(p_code);
+		SnackDto code_dto = dao.checkPCode(p_code);
+		int count = code_dto.getCode_count();
 		String msg="";
 		String url="Snack";
 		
