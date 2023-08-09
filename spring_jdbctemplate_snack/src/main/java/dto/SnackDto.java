@@ -5,6 +5,12 @@ public class SnackDto {
 	private String p_code, p_name, m_code, m_name, strPrice;
 	private int price;
 	
+	
+	
+	public SnackDto() {
+		super();
+	}
+
 	//조회
 	public SnackDto(String p_code, String p_name, String m_name, String strPrice, int price) {
 		super();

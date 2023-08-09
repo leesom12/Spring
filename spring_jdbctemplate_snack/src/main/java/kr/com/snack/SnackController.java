@@ -27,7 +27,7 @@ public class SnackController {
 		CommonTemplate.setTemplate(template);
 	}
 	
-	@RequestMapping
+	@RequestMapping("Snack")
 	public String member(HttpServletRequest request) {
 		String gubun= request.getParameter("t_gubun");
 		if(gubun == null) gubun="list";
