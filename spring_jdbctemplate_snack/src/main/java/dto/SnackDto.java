@@ -11,31 +11,6 @@ public class SnackDto {
 		super();
 	}
 
-	//조회
-	public SnackDto(String p_code, String p_name, String m_name, String strPrice, int price) {
-		super();
-		this.p_code = p_code;
-		this.p_name = p_name;
-		this.m_name = m_name;
-		this.strPrice = strPrice;
-		this.price = price;
-	}
-
-	//수정, 등록
-	public SnackDto(String p_code, String p_name, String m_code, int price) {
-		super();
-		this.p_code = p_code;
-		this.p_name = p_name;
-		this.m_code = m_code;
-		this.price = price;
-	}
-
-	//제조사 코드, 제조사명 조회
-	public SnackDto(String m_code, String m_name) {
-		super();
-		this.m_code = m_code;
-		this.m_name = m_name;
-	}
 
 	
 	public int getCode_count() {
