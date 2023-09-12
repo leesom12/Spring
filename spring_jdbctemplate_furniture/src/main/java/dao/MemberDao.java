@@ -1,7 +1,12 @@
 package dao;
 
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import common.CommonTemplate;
 import dto.MemberDto;
@@ -14,23 +19,40 @@ public class MemberDao {
 	
     //아이디 중복 체크
     public int checkId(String id) {
-    	String query="select count(*) as count from bike_이소민_member\r\n" + 
+    	String query="select count(*) as count from furni_이소민_member\r\n" + 
     				 "where id ='"+id+"'";
-    	return template.update(query);
+    	
+    	int count = template.queryForObject(query, Integer.class);
+    	return count;
     }
     
     //회원가입
     public int saveMember(MemberDto dto) {
-    	String query="insert into bike_이소민_member\r\n" + 
-	    			"(id, name, password, area, address, mobile_1, mobile_2, mobile_3, gender,\r\n" + 
-	    			"hobby_travel, hobby_reading, hobby_sports, reg_date, pass_length)\r\n" + 
-	    			"values\r\n" + 
-	    			"('"+dto.getId()+"', '"+dto.getName()+"', '"+dto.getPassword()+"', '"+dto.getArea()+"', '"+dto.getAddress()+"'"
-	    			+ ", '"+dto.getMobile_1()+"', '"+dto.getMobile_2()+"', '"+dto.getMobile_3()+"', '"+dto.getGender()+"',\r\n" + 
-	    			"'"+dto.getTravel()+"', '"+dto.getReading()+"', '"+dto.getSports()+"', to_date('"+dto.getReg_date()+"', "
-	    			+ "'yyyy-MM-dd hh24:mi:ss'), "+dto.getPass_len()+")";
+    	String query="insert into furni_이소민_member\r\n" + 
+    			"(id, name, password, area, address, mobile_1, mobile_2, mobile_3, gender,\r\n" + 
+    			"hobby_travel, hobby_reading, hobby_sports, reg_date, pass_length)\r\n" + 
+    			"values\r\n" + 
+    			"('"+dto.getId()+"', '"+dto.getName()+"', '"+dto.getPassword()+"', '"+dto.getArea()+"', '"+dto.getAddress()+"',"
+    			+ " '"+dto.getMobile_1()+"', '"+dto.getMobile_2()+"', '"+dto.getMobile_3()+"', '"+dto.getGender()+"',\r\n" + 
+    			"'"+dto.getTravel()+"', '"+dto.getReading()+"', '"+dto.getSports()+"', "
+    			+ "to_date('"+dto.getReg_date()+"', 'yyyy-MM-dd hh24:mi:ss'), "+dto.getPass_len()+")";
     	return template.update(query);
     }
+    
+	//비밀번호 암호화
+    public String encryptSHA256(String value) throws NoSuchAlgorithmException{
+        String encryptData ="";
+         
+        MessageDigest sha = MessageDigest.getInstance("SHA-256");
+        sha.update(value.getBytes());
+ 
+        byte[] digest = sha.digest();
+        for (int i=0; i<digest.length; i++) {
+            encryptData += Integer.toHexString(digest[i] &0xFF).toUpperCase();
+        }
+         
+        return encryptData;
+    }  
 	
 /*	
 	Connection con = null;

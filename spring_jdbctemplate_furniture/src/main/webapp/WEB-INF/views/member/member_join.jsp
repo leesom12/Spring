@@ -13,6 +13,37 @@
 		if(checkValue(mem.t_mobile2,"연락처를 입력하세요"))return;
 		if(checkValue(mem.t_mobile3,"연락처를 입력하세요"))return;
 		if(checkValue(mem.t_gender,"성별을 선택하세요"))return;
+		if(mem.t_CheckValue.value=="" || mem.t_CheckValue.value!=mem.t_id.value){
+			alert("아이디 중복검사 하세요");
+			return;
+		}
+		
+		mem.method="post";
+		mem.t_gubun.value = "memberSave";
+		mem.action="Member";
+		mem.submit();
+	}
+	
+	function checkId(){
+		if(checkValue(mem.t_id,"아이디 입력 후 중복검사 하세요"))return;
+		$.ajax({
+			type : "POST",
+			url : "MemberCheckID",
+			data: "t_id="+mem.t_id.value,
+			dataType : "text",
+			error : function(){
+				alert('통신실패!!!!!');
+			},
+			success : function(data){
+				$("#idResult").text(data);
+				if(data=="이미 존재하는 아이디입니다"){
+					$("#idResult").css("color","red");
+				}else{
+					$("#idResult").css("color","black");
+					mem.t_CheckValue.value = mem.t_id.value;
+				}
+			}
+		});				
 	}
 </script>
 	
@@ -30,6 +61,7 @@
 				MEMBER JOIN
 			</p>
 			<form name="mem">
+			<input type="hidden" name="t_gubun">
 			<table class="boardForm">
 			  <colgroup>
 				<col width="200" />
@@ -41,6 +73,8 @@
 				  <td>
 					<input name="t_id" type="text" size="10" id="id" title="id입력하세요">
 					<input type="button" onclick="checkId()" value="ID중복검사" class="checkB">
+					<span id="idResult"></span>
+					<input type="hidden" name="t_CheckValue">
 				  </td>
 				</tr>
 				<tr>
@@ -59,10 +93,10 @@
 				  <th>지역</th>
 				  <td>
 					<select name="t_area">
-						<option value="02">서울</option>
-						<option value="042">대전</option>
-						<option value="051">부산</option>
-						<option value="053">대구</option>        
+						<option value="서울">서울</option>
+						<option value="대전">대전</option>
+						<option value="부산">부산</option>
+						<option value="대구">대구</option>        
 					</select>	  
 				  </td>
 				</tr>	
