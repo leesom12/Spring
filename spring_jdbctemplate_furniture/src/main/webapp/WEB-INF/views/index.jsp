@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -92,8 +95,14 @@
 				<ul class="top_menu">
 					<li><a href="" class="allclick"><i class="fas fa-bars"></i></a></li>
 					<li><a href="javascript:goPage('join')">Contack</a></li>
-					<li><a href="javascript:goPage('login')">Login</a></li>
-					<li><a href="Home"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+					<c:if test="${empty sessionId }">
+						<li><a href="javascript:goPage('login')">Login</a></li>
+					</c:if>
+					<c:if test="${not empty sessionId }">
+						<li><a href="javascript:goPage('myInfo')">MyInfo</a></li>
+						<li><a href="javascript:goPage('logout')">Logout</a></li>
+					</c:if>
+					<li><a href="Home"><i class="fa fa-home" aria-hidden="true"></i> Home </a></li>
 				</ul>
 			</div>	
 	</div>

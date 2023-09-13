@@ -17,6 +17,22 @@ public class MemberDao {
 	
 	JdbcTemplate template = CommonTemplate.getTemplate();
 	
+    //로그인
+    public String memberLogin(String id, String pw) {
+    	String query="select name from furni_이소민_member\r\n" + 
+    				 "where id ='"+id+"'\r\n" + 
+    				 "and password = '"+pw+"'\r\n"+
+    				 "and exit_date is null";
+    	String name = "";
+    	try {
+    		name = template.queryForObject(query, String.class);
+    	}catch(Exception e) {
+    		
+    	}
+    	return name;
+    }
+	
+	
     //아이디 중복 체크
     public int checkId(String id) {
     	String query="select count(*) as count from furni_이소민_member\r\n" + 

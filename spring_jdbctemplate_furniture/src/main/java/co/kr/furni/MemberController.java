@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import command.member.MemberLogin;
+import command.member.MemberLogout;
 import command.member.MemberSave;
 import common.CommonExecute;
 import dao.MemberDao;
@@ -30,6 +32,16 @@ public class MemberController {
 			CommonExecute ce = new MemberSave();
 			ce.execute(request);
 			viewPage = "common_alert";
+		}else if(gubun.equals("memberLogin")) {
+			CommonExecute ce = new MemberLogin();
+			ce.execute(request);
+			viewPage = "common_alert";
+		}else if(gubun.equals("logout")) {
+			CommonExecute ce = new MemberLogout();
+			ce.execute(request);
+			viewPage = "common_alert";
+		}else if(gubun.equals("myInfo")) {
+			
 		}
 		
 		return viewPage;
