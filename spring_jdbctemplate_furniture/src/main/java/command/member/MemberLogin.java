@@ -34,6 +34,9 @@ public class MemberLogin implements CommonExecute {
 			msg= name+"님 환영합니다!";
 			url= "Home";
 			
+			int result = dao.updateLoginTime(id);
+			if(result != 1)System.out.println("최종로그인시간 업데이트 오류 발생");
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("sessionId", id);
 			session.setAttribute("sessionName", name);

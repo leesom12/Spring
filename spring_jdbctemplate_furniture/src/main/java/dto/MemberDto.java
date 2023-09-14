@@ -5,54 +5,10 @@ public class MemberDto {
 				   travel, reading, sports, reg_date, update_date, login_time, exit_date, level;
 	private int pass_len;
 	
+	
 
-	//회원정보 수정
-	public MemberDto(String id, String name, String area, String address, String mobile_1, String mobile_2,
-			String mobile_3, String gender, String travel, String reading, String sports, String update_date) {
+	public MemberDto() {
 		super();
-		this.id = id;
-		this.name = name;
-		this.area = area;
-		this.address = address;
-		this.mobile_1 = mobile_1;
-		this.mobile_2 = mobile_2;
-		this.mobile_3 = mobile_3;
-		this.gender = gender;
-		this.travel = travel;
-		this.reading = reading;
-		this.sports = sports;
-		this.update_date = update_date;
-	}
-
-	//상세조회
-	public MemberDto(String id, String name, String area, String address, String mobile_1, String mobile_2,
-			String mobile_3, String gender, String travel, String reading, String sports, String reg_date,
-			String update_date, String login_time, String exit_date, String level, int pass_len) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.area = area;
-		this.address = address;
-		this.mobile_1 = mobile_1;
-		this.mobile_2 = mobile_2;
-		this.mobile_3 = mobile_3;
-		this.gender = gender;
-		this.travel = travel;
-		this.reading = reading;
-		this.sports = sports;
-		this.reg_date = reg_date;
-		this.update_date = update_date;
-		this.login_time = login_time;
-		this.exit_date = exit_date;
-		this.level = level;
-		this.pass_len = pass_len;
-	}
-
-	//로그인
-	public MemberDto(String name, String level) {
-		super();
-		this.name = name;
-		this.level = level;
 	}
 
 	//회원가입
@@ -75,7 +31,82 @@ public class MemberDto {
 		this.reg_date = reg_date;
 		this.pass_len = pass_len;
 	}
-	
+
+
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setMobile_1(String mobile_1) {
+		this.mobile_1 = mobile_1;
+	}
+
+	public void setMobile_2(String mobile_2) {
+		this.mobile_2 = mobile_2;
+	}
+
+	public void setMobile_3(String mobile_3) {
+		this.mobile_3 = mobile_3;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public void setTravel(String travel) {
+		this.travel = travel;
+	}
+
+	public void setReading(String reading) {
+		this.reading = reading;
+	}
+
+	public void setSports(String sports) {
+		this.sports = sports;
+	}
+
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
+	}
+
+	public void setUpdate_date(String update_date) {
+		this.update_date = update_date;
+	}
+
+	public void setLogin_time(String login_time) {
+		this.login_time = login_time;
+	}
+
+	public void setExit_date(String exit_date) {
+		this.exit_date = exit_date;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public void setPass_len(int pass_len) {
+		this.pass_len = pass_len;
+	}
+
 	public String getLevel() {
 		return level;
 	}

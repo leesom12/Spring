@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import common.CommonTemplate;
+import common.CommonUtil;
 import dto.MemberDto;
 
 
@@ -16,6 +17,32 @@ public class MemberDao {
 	
 	
 	JdbcTemplate template = CommonTemplate.getTemplate();
+	
+    //로그인 시간 업데이트
+    public int updateLoginTime(String id) {
+    	String loginTime = CommonUtil.getTodayTime();
+    	String query="update furni_이소민_member\r\n" + 
+    				 "set login_time= to_date('"+loginTime+"', 'yyyy-MM-dd hh24:mi:ss')\r\n" + 
+    				 "where id='"+id+"'";
+    	return template.update(query);
+    }
+	
+	
+	//회원 정보 조회
+    public MemberDto memberInfo(String id) {
+    	String query="select id, name, pass_length as pass_len, area, address, mobile_1, mobile_2, mobile_3, \r\n" + 
+    				 "gender, hobby_travel as travel, hobby_reading as reading, hobby_sports as sports, \r\n" + 
+    				 "to_char(reg_date, 'yyyy-MM-dd hh24:mi:ss') as reg_date, \r\n" + 
+    				 "to_char(update_date, 'yyyy-MM-dd hh24:mi:ss') as update_date, \r\n" + 
+    				 "to_char(login_time, 'yyyy-MM-dd hh24:mi:ss') as login_time, \r\n" + 
+    				 "to_char(exit_date, 'yyyy-MM-dd hh24:mi:ss') as exit_date\r\n" + 
+    				 "from furni_이소민_member\r\n" + 
+    				 "where id = '"+id+"'";
+    	RowMapper<MemberDto> memdto = new BeanPropertyRowMapper<MemberDto>(MemberDto.class);
+    	MemberDto dto = (MemberDto)template.queryForObject(query, memdto);
+    	return dto;
+    }
+	
 	
     //로그인
     public String memberLogin(String id, String pw) {

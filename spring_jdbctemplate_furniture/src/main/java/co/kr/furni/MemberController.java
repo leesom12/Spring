@@ -5,12 +5,14 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import command.member.MemberLogin;
 import command.member.MemberLogout;
+import command.member.MemberMyinfo;
 import command.member.MemberSave;
 import common.CommonExecute;
 import dao.MemberDao;
@@ -41,7 +43,18 @@ public class MemberController {
 			ce.execute(request);
 			viewPage = "common_alert";
 		}else if(gubun.equals("myInfo")) {
+			HttpSession session = request.getSession();
+			String id = (String) session.getAttribute("sessionId");
 			
+			if(id==null) {
+				request.setAttribute("t_msg", "로그인 시간 만료. 다시 로그인 해 주세요");
+				request.setAttribute("t_url", "Member");
+				viewPage="common_alert";
+			}else {
+				CommonExecute ce = new MemberMyinfo();
+				ce.execute(request);
+				viewPage="/member/member_myinfo";
+			}
 		}
 		
 		return viewPage;
