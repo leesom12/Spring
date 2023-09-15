@@ -2,6 +2,7 @@ package co.kr.furni;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import command.member.MemberLogin;
 import command.member.MemberLogout;
 import command.member.MemberMyinfo;
 import command.member.MemberSave;
+import command.member.MemberUpdate;
 import common.CommonExecute;
 import dao.MemberDao;
 
@@ -25,6 +27,9 @@ public class MemberController {
 		String gubun = request.getParameter("t_gubun");
 		if(gubun==null) gubun="login";
 		String viewPage = "";
+		
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("sessionId");
 		
 		if(gubun.equals("join")) {
 			viewPage = "/member/member_join";
@@ -43,9 +48,6 @@ public class MemberController {
 			ce.execute(request);
 			viewPage = "common_alert";
 		}else if(gubun.equals("myInfo")) {
-			HttpSession session = request.getSession();
-			String id = (String) session.getAttribute("sessionId");
-			
 			if(id==null) {
 				request.setAttribute("t_msg", "로그인 시간 만료. 다시 로그인 해 주세요");
 				request.setAttribute("t_url", "Member");
@@ -55,6 +57,20 @@ public class MemberController {
 				ce.execute(request);
 				viewPage="/member/member_myinfo";
 			}
+		}else if(gubun.equals("updateForm")) {
+			if(id==null) {
+				request.setAttribute("t_msg", "로그인 시간 만료. 다시 로그인 해 주세요");
+				request.setAttribute("t_url", "Member");
+				viewPage="common_alert";
+			}else {
+				CommonExecute ce = new MemberMyinfo();
+				ce.execute(request);
+				viewPage="/member/member_update";
+			}
+		}else if(gubun.equals("memberUpdate")) {
+			CommonExecute ce = new MemberUpdate();
+			ce.execute(request);
+			viewPage="common_alert";
 		}
 		
 		return viewPage;
@@ -85,4 +101,50 @@ public class MemberController {
 		out.print(msg);
 		
 	}
+	
+	@RequestMapping("MemberCheckPassword")
+	public void memberCheckPassword(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("t_id");
+		String pw = request.getParameter("t_password");
+		
+		MemberDao dao = new MemberDao();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = null;
+		
+		try {
+			pw = dao.encryptSHA256(pw);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String msg = "";
+		String name = dao.memberLogin(id, pw);
+		if(name.equals("")) {
+			msg="no";
+		}else {
+			msg="yes";
+		}
+		
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		out.print(msg);
+		
+	}
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+
+

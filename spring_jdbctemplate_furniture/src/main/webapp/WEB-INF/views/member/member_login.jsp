@@ -24,7 +24,8 @@
 			<ul>
 				<li><a href="javascript:goPage('login')"><span class="fnt"><i class="fas fa-apple-alt"></i></span>LOGIN</a></li>
 				<li><a href="">ID / PASSWORD</a></li>
-				<li><a href="javascript:goPage('join')"> CONTACK</a></li>
+				<li><a href="javascript:goPage('join')">CONTACT</a></li>
+				<li><a href="javascript:goPage('myInfo')"> MYINFO</a></li>
 			</ul>
 		</div>
 		

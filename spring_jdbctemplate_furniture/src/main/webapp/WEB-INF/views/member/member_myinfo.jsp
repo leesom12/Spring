@@ -2,13 +2,27 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common_header.jsp" %>
 	
-	
+<script type="text/javascript">
+	function goUpdateForm(){
+		mem.t_gubun.value = "updateForm";
+		mem.method ="post";
+		mem.action ="Member";
+		mem.submit();
+	}
+</script>
+
+<form name="mem">
+	<input type="hidden" name="t_gubun">
+	<input type="hidden" name="t_id" value="${t_dto.getId()}">
+</form>
+
 		<div id="b_left">
 			<P>MEMBER</P>
 			<ul>
 				<li><a href="javascript:goPage('login')">LOGIN</a></li>
 				<li><a href="">ID / PASSWORD</a></li>
-				<li><a href="javascript:goPage('join')"><span class="fnt"><i class="fas fa-apple-alt"></i></span> CONTACK</a></li>
+				<li><a href="javascript:goPage('join')">CONTACT</a></li>
+				<li><a href="javascript:goPage('myInfo')"><span class="fnt"><i class="fas fa-apple-alt"></i></span> MYINFO</a></li>
 			</ul>
 		</div>
 		
@@ -16,8 +30,7 @@
 			<p class="n_title">
 				MEMBER MyInfo
 			</p>
-			<form name="mem">
-			<input type="hidden" name="t_gubun">
+			
 			<table class="boardForm">
 			  <colgroup>
 				<col width="200" />
@@ -80,11 +93,11 @@
 				</tr>
 			  </tbody>
 			</table>
-			</form>
+			
 			<div class="buttonGroup_center">
-				<a href="javascript:goJoin()" class="butt">정보수정</a>
-				<a href="javascript:goJoin()" class="butt">비밀번호변경</a>
-				<a href="javascript:goJoin()" class="butt">회원탈퇴</a>
+				<a href="javascript:goUpdateForm()" class="butt">정보수정</a>
+				<a href="javascript:()" class="butt">비밀번호변경</a>
+				<a href="javascript:()" class="butt">회원탈퇴</a>
 			</div>	
 		</div>	
 

@@ -18,6 +18,20 @@ public class MemberDao {
 	
 	JdbcTemplate template = CommonTemplate.getTemplate();
 	
+    //회원정보 수정
+	public int memberUpdate(MemberDto dto) {
+		String query="update furni_이소민_member\r\n" + 
+					 "set name='"+dto.getName()+"', area='"+dto.getArea()+"', address='"+dto.getAddress()+"', \r\n"+
+					 "mobile_1='"+dto.getMobile_1()+"', mobile_2='"+dto.getMobile_2()+"', mobile_3='"+dto.getMobile_3()+"', \r\n"+
+					 "gender='"+dto.getGender()+"', \r\n" + 
+					 "hobby_travel='"+dto.getTravel()+"', hobby_reading='"+dto.getReading()+"', hobby_sports='"+dto.getSports()+"', \r\n" + 
+					 "update_date=to_date('"+dto.getUpdate_date()+"', 'yyyy-MM-dd hh24:mi:ss')\r\n" + 
+					 "where id='"+dto.getId()+"'";
+		return template.update(query);
+	}
+	
+	
+	
     //로그인 시간 업데이트
     public int updateLoginTime(String id) {
     	String loginTime = CommonUtil.getTodayTime();

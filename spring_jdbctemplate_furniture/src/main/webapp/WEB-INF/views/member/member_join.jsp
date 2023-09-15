@@ -52,7 +52,8 @@
 			<ul>
 				<li><a href="javascript:goPage('login')">LOGIN</a></li>
 				<li><a href="">ID / PASSWORD</a></li>
-				<li><a href="javascript:goPage('join')"><span class="fnt"><i class="fas fa-apple-alt"></i></span> CONTACK</a></li>
+				<li><a href="javascript:goPage('join')"><span class="fnt"><i class="fas fa-apple-alt"></i></span>CONTACT</a></li>
+				<li><a href="javascript:goPage('myInfo')"> MYINFO</a></li>
 			</ul>
 		</div>
 		
