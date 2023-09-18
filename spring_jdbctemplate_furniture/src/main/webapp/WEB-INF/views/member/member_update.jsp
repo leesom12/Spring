@@ -51,7 +51,7 @@
 				<li><a href="javascript:goPage('login')">LOGIN</a></li>
 				<li><a href="">ID / PASSWORD</a></li>
 				<li><a href="javascript:goPage('join')">CONTACT</a></li>
-				<li><a><span class="fnt"><i class="fas fa-apple-alt"></i></span>MYINFO</a></li>
+				<li><a href="javascript:goPage('myInfo')"><span class="fnt"><i class="fas fa-apple-alt"></i></span> MYINFO</a></li>
 			</ul>
 		</div>
 		
@@ -125,6 +125,7 @@
 			</form>
 			<div class="buttonGroup_center">
 				<a href="javascript:goUpdate()" class="butt">UPDATE</a>
+				<a href="javascript:history.back()" class="butt">뒤로가기</a>
 			</div>	
 		</div>	
 

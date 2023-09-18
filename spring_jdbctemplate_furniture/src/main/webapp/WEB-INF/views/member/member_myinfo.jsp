@@ -9,6 +9,13 @@
 		mem.action ="Member";
 		mem.submit();
 	}
+	
+	function pwUpdate(){
+		mem.t_gubun.value = "pwUpdateForm";
+		mem.method ="post";
+		mem.action ="Member";
+		mem.submit();
+	}
 </script>
 
 <form name="mem">
@@ -96,7 +103,7 @@
 			
 			<div class="buttonGroup_center">
 				<a href="javascript:goUpdateForm()" class="butt">정보수정</a>
-				<a href="javascript:()" class="butt">비밀번호변경</a>
+				<a href="javascript:pwUpdate()" class="butt">비밀번호변경</a>
 				<a href="javascript:()" class="butt">회원탈퇴</a>
 			</div>	
 		</div>	

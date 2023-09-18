@@ -18,6 +18,15 @@ public class MemberDao {
 	
 	JdbcTemplate template = CommonTemplate.getTemplate();
 	
+	//비밀번호 변경
+	public int passwordUpdate(String id, String pw, int pw_len) {
+		String query="update furni_이소민_member\r\n" + 
+					 "set password='"+pw+"', pass_length='"+pw_len+"'\r\n" + 
+					 "where id='"+id+"'";
+		return template.update(query);
+	}
+	
+	
     //회원정보 수정
 	public int memberUpdate(MemberDto dto) {
 		String query="update furni_이소민_member\r\n" + 
